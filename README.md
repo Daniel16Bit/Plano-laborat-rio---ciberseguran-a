@@ -2,9 +2,15 @@
 
 Guia completo para montar, do zero, um laboratório de cibersegurança **ofensivo e defensivo** rodando inteiramente em um desktop doméstico. A ideia é simples: um só computador, um ambiente 100% isolado, e você aprendendo a atacar e a defender no mesmo lugar — o famoso **Purple Team solo**, que é a forma mais rápida de evoluir estudando sozinho.
 
-Todo o material nasceu de um plano personalizado para um desktop específico (as especificações estão logo abaixo), mas a estrutura serve para qualquer máquina parecida. Se o seu hardware for diferente, os números de RAM e disco mudam, mas o raciocínio continua o mesmo.
+Todo o material nasceu de um plano personalizado para um desktop específico (as especificações estão logo abaixo), mas a estrutura serve para qualquer máquina parecida.
 
-> ⚠️ **Uso educacional exclusivo.** Tudo aqui é para ser praticado em máquinas que você mesmo criou, dentro de um ambiente fechado. No Brasil, invadir sistema alheio sem autorização é crime — **Lei 12.737/2012 (Lei Carolina Dieckmann)**. Estude, pratique, respeite a lei. Os detalhes estão na [Parte 17](docs/17-isolamento-e-seguranca.md).
+> ⚠️ **Uso educacional exclusivo.** No Brasil, invadir sistema alheio sem autorização é crime — **Lei 12.737/2012**. Estude, pratique, respeite a lei.
+
+---
+
+## 🤖 Sobre este material
+
+A documentação foi criada com auxílio de Inteligência Artificial para acelerar o processo de escrita e organização. O conteúdo técnico, as decisões de estudo e a prática são de responsabilidade do autor.
 
 ---
 
@@ -16,16 +22,12 @@ Todo o material nasceu de um plano personalizado para um desktop específico (as
 | **GPU** | RTX 4060 8 GB — 3584 CUDA cores | 🏆 O diferencial: Hashcat ~50x mais rápido que na CPU |
 | **RAM** | 16 GB DDR4 | O principal limitante — exige gerenciamento consciente |
 | **Disco** | 256 GB Linux (Kali) + ~744 GB Windows 11 | Estratégia híbrida: VMs pesadas na partição Windows |
-| **Rede** | Wi-Fi + Ethernet | Ethernet para comunicação entre VMs e acesso à internet |
+| **Rede** | Wi-Fi + Ethernet | Ethernet para comunicação entre VMs |
 | **Boot** | Dual Boot Kali + Windows 11 | Kali = Red Team · Windows 11 = ferramentas Blue Team nativas |
-
-A jogada central é usar o **dual boot a seu favor**: você ataca a partir do Kali e analisa os logs no Windows 11 com Wazuh, Sysinternals e companhia. Dois lados da mesma moeda, na mesma máquina.
 
 ---
 
 ## 📚 Índice da documentação
-
-Cada parte do guia virou um arquivo próprio dentro de [`docs/`](docs/), para você navegar, buscar e linkar direto o que precisa.
 
 ### Fundamentos e planejamento
 - **[Parte 1 — Fundamentos e conceitos](docs/01-fundamentos.md)** · Tríade CIA, Red/Blue/Purple Team, PTES, MITRE ATT&CK, Kill Chain, redes, Linux e Windows para segurança
@@ -49,74 +51,50 @@ Cada parte do guia virou um arquivo próprio dentro de [`docs/`](docs/), para vo
 - **[Parte 13 — 10 desafios práticos (CorpLab S.A.)](docs/13-desafios-praticos.md)** · Um pentest completo em formato de missões
 
 ### Carreira e apoio
-- **[Parte 14 — Plataformas, recursos e links](docs/14-recursos-e-links.md)** · Onde estudar, canais, livros e bookmarks obrigatórios
-- **[Parte 15 — Roadmap de certificações](docs/15-certificacoes.md)** · eJPT, PNPT, OSCP, Security+ e o caminho entre elas
-- **[Parte 16 — TryHackMe vale a pena?](docs/16-tryhackme.md)** · Análise honesta de custo x benefício
-- **[Parte 17 — Segurança e isolamento](docs/17-isolamento-e-seguranca.md)** · As regras de ouro para não se machucar (nem infringir a lei)
-- **[Parte 18 — Glossário](docs/18-glossario.md)** · Os termos essenciais em uma página
+- **[Parte 14 — Plataformas, recursos e links](docs/14-recursos-e-links.md)**
+- **[Parte 15 — Roadmap de certificações](docs/15-certificacoes.md)** · eJPT, PNPT, OSCP, Security+
+- **[Parte 16 — TryHackMe vale a pena?](docs/16-tryhackme.md)**
+- **[Parte 17 — Segurança e isolamento](docs/17-isolamento-e-seguranca.md)**
+- **[Parte 18 — Glossário](docs/18-glossario.md)**
 
 ---
 
 ## 🚀 Começando rápido
 
-Se você quer sair do papel hoje, esta é a sequência mínima:
-
-1. **Instale o VirtualBox no Kali** e crie as redes virtuais isoladas — [Parte 3](docs/03-arquitetura.md).
-2. **Suba as duas primeiras VMs**: Kali atacante + DVWA. É o suficiente para os primeiros ataques web — [Parte 4](docs/04-maquinas-virtuais.md).
-3. **Faça o primeiro Nmap e a primeira SQL Injection** — [Parte 12](docs/12-exercicios-progressivos.md), Nível 1.
-4. **Configure a RTX 4060 no Hashcat** para quebrar seu primeiro hash em segundos — [Parte 2](docs/02-hardware.md).
-5. **Suba o Wazuh** e comece a enxergar os seus próprios ataques do lado defensor — [Parte 6](docs/06-blue-team.md).
-
-A ordem completa, semana a semana, está na [Parte 4](docs/04-maquinas-virtuais.md#42-ordem-de-montagem--semana-a-semana).
+1. Instale o VirtualBox e crie as redes virtuais — [Parte 3](docs/03-arquitetura.md)
+2. Suba as primeiras VMs: Kali atacante + DVWA — [Parte 4](docs/04-maquinas-virtuais.md)
+3. Faça o primeiro Nmap e a primeira SQL Injection — [Parte 12](docs/12-exercicios-progressivos.md)
+4. Configure a RTX 4060 no Hashcat — [Parte 2](docs/02-hardware.md)
+5. Suba o Wazuh e veja seus ataques do lado defensor — [Parte 6](docs/06-blue-team.md)
 
 ---
 
-## 🗺️ Topologia do laboratório
+## 🗺️ Topologia
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                  DESKTOP — LABORATÓRIO COMPLETO                │
-│                                                                │
-│  KALI LINUX HOST (nativo)                                      │
-│   • VirtualBox rodando todas as VMs                            │
-│   • Hashcat com RTX 4060 (nativo, sem VM)                      │
-│   • Ferramentas Red Team direto no host                        │
-│                          │ VirtualBox                          │
-│  ┌───────────────────────▼──────────────────────────────────┐ │
-│  │  LabNET — 192.168.100.0/24 (NAT)                          │ │
-│  │  [Kali VM .100]  [pfSense .1]  [Wazuh Server .150]        │ │
-│  └───────────────────────┬──────────────────────────────────┘ │
-│                          │ pfSense roteia e filtra             │
-│  ┌───────────────────────▼──────────────────────────────────┐ │
-│  │  TargetNET — 192.168.200.0/24 (NAT separada)             │ │
-│  │  [MSF3 Linux .10] [MSF3 Win .20] [DVWA .30]              │ │
-│  │  [Windows Server AD .40] [Ubuntu .50]                     │ │
-│  └──────────────────────────────────────────────────────────┘ │
-│  ┌──────────────────────────────────────────────────────────┐ │
-│  │  MalNET — Internal Network (TOTALMENTE ISOLADA)          │ │
-│  │  [REMnux .10] [Flare-VM .20] [Cuckoo .30]                │ │
-│  └──────────────────────────────────────────────────────────┘ │
-│                                                                │
-│  WINDOWS 11 (dual boot — Blue Team nativo):                    │
-│   Wazuh Agent → Wazuh Server · Sysinternals · Autopsy         │
-└──────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│              DESKTOP — LABORATÓRIO COMPLETO           │
+│                                                      │
+│  KALI LINUX HOST                                     │
+│   • VirtualBox + Hashcat com RTX 4060 (nativo)      │
+│                        │                            │
+│  ┌─────────────────────▼──────────────────────────┐ │
+│  │  LabNET 192.168.100.0/24                        │ │
+│  │  [Kali VM .100] [pfSense .1] [Wazuh .150]       │ │
+│  └─────────────────────┬──────────────────────────┘ │
+│                        │                            │
+│  ┌─────────────────────▼──────────────────────────┐ │
+│  │  TargetNET 192.168.200.0/24                     │ │
+│  │  [MSF3 Linux .10] [MSF3 Win .20]                │ │
+│  │  [DVWA .30] [AD Server .40]                     │ │
+│  └────────────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────────────┐ │
+│  │  MalNET — Internal (sem acesso externo)        │ │
+│  │  [REMnux .10] [Flare-VM .20]                   │ │
+│  └────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────┘
 ```
 
-Detalhes de cada rede e o porquê de cada escolha estão na [Parte 3](docs/03-arquitetura.md).
-
 ---
 
-## 📄 Guia original em PDF
-
-O guia completo em PDF, formatado para leitura corrida, está no repositório:
-**[`Laboratorio_Ciberseguranca_Desktop_v3.pdf`](Laboratorio_Ciberseguranca_Desktop_v3.pdf)**
-
-A documentação em Markdown desta pasta é a versão navegável e sempre atualizada do mesmo conteúdo.
-
----
-
-## ⚖️ Aviso legal
-
-Este material é **exclusivamente educacional** e voltado para prática em ambiente isolado e controlado. Aplicar qualquer técnica aqui descrita contra sistemas de terceiros sem autorização expressa e por escrito é crime. A responsabilidade pelo uso é inteiramente de quem pratica.
-
-_"Hack the planet — ethically. Estude, pratique, respeite a lei."_
+_"Hack the planet — ethically."_
